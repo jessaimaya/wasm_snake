@@ -1,4 +1,4 @@
-import init, {World} from "snake";
+import init, {Direction, World} from "snake";
 
 init().then(_ => {
     const CELL_SIZE = 10;
@@ -12,6 +12,27 @@ init().then(_ => {
     const WIDTH = canvas.width;
     const HEIGHT = canvas.height;
 
+    document.addEventListener("keydown", function(evt) {
+        switch (evt.code) {
+            case "KeyA":
+            case "ArrowLeft":
+                world.change_direction(Direction.Left);
+                break;
+            case "KeyD":
+            case "ArrowRight":
+                world.change_direction(Direction.Right);
+                break;
+            case "KeyW":
+            case "ArrowUp":
+                world.change_direction(Direction.Up);
+                break;
+            case "KeyS":
+            case "ArrowDown":
+                world.change_direction(Direction.Down);
+                break;
+        }
+    });
+
     function drawGrid() {
         ctx.beginPath();
         for (let x = 0; x < CELL_SIZE + 1; x++) {
@@ -23,7 +44,6 @@ init().then(_ => {
             ctx.lineTo(HEIGHT, CELL_SIZE * y);
         }
         ctx.stroke();
-        console.log("drawing grid")
     }
 
     function drawSnake() {
