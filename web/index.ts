@@ -6,15 +6,12 @@ init().then(wasm => {
     const snakeSpawnInd = Date.now() % (WORLD_WIDTH * WORLD_WIDTH);
 
     const world = World.new(WORLD_WIDTH, snakeSpawnInd);
-    const worldWidth = world.width();
+    const worldWidth:number = world.width();
     const canvas = <HTMLCanvasElement> document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
 
     canvas.width = worldWidth * CELL_SIZE;
     canvas.height = worldWidth * CELL_SIZE;
-
-    const WIDTH = canvas.width;
-    const HEIGHT = canvas.height;
 
     document.addEventListener("keydown", function(evt) {
         switch (evt.code) {
@@ -88,7 +85,7 @@ init().then(wasm => {
     }
 
     function update() {
-        const fps = 3;
+        const fps = 5;
         setTimeout(()=> {
             ctx.clearRect(0,0,canvas.width, canvas.height);
             world.step();
